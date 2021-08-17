@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+
+// TIME COMPLEXITY: O(n)
+// SPACE COMPLEXITY: O(1)
+
+func reverseList(head *ListNode) *ListNode {
+    // edge case if the list is empty
+    if head == nil {
+        return nil
+    }
+
+    oCurr := head
+    oNext := oCurr.Next
+    var oPrev *ListNode
+
+    // edge case if the list only contains one element
+    if oCurr.Next == nil {
+        return oCurr
+    }
+
+    // iterate through all of these nodes
+    for oCurr != nil{
+        // make currs pointer point to prev
+        oCurr.Next = oPrev
+
+        // make prev point to curr
+        oPrev = oCurr
+
+        // make oCurr point to next
+        oCurr = oNext
+
+        if oNext != nil {
+            // make oNext point to oCurr's next
+            oNext = oCurr.Next
+        }
+    }
+
+    // make the head the last item on the list
+    head = oPrev
+    return head
+}
