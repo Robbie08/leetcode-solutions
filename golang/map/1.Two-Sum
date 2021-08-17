@@ -1,0 +1,24 @@
+// Time complexity: O(N)
+// Space complexity: O(N) since we are creating a map and at worst storing N key value pairs in it.
+func twoSum(nums []int, target int) []int {
+    // check if the array is empty or if it only contains 1 value
+    if len(nums) == 0 || len(nums) == 1 {
+        return []int{}
+    }
+    
+    answers := make(map[int]int) // create a map that contains our anwers {answer:index}
+    
+    for i := 0; i < len(nums); i++ {
+        ans := target - nums[i] // this represents the value that would make num1 + num2 = target
+        
+        // if the current value we are on is in the map, 
+        // then return an array with that key's index and the current index
+        if index, isKeyInMap := answers[nums[i]]; isKeyInMap {
+            return []int{index,i}
+        }else{
+            // add values to map
+            answers[ans] = i
+        }
+    }
+    return []int{} 
+}
