@@ -1,0 +1,14 @@
+func containsDuplicate(nums []int) bool {
+    seent := make(map[int]bool)
+    
+    // iter through arr
+    for i := 0; i < len(nums); i++ {
+        val := nums[i]
+        // if we see the value we are currently on in the set then we have duplicates
+        if _, isInMap := seent[nums[i]]; isInMap {
+            return true
+        }
+        seent[val] = true // add value to our set
+    }
+    return false
+}
