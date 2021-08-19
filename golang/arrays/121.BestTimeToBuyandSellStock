@@ -1,0 +1,32 @@
+import (
+    "math"
+)
+
+// TIME COMPLEXITY : O(N)
+// SPACE COMPLEXITY: O(1)
+func maxProfit(prices []int) int {
+    i := 0 // tail of the caterpillar
+    j := 1 // head of the caterpillar
+    profit := -1
+
+    for j < len(prices) {
+        buy := prices[i]
+        sell := prices[j]
+        tempProfit := sell - buy
+
+        // if the profit is negative, then we have to update p1
+        if tempProfit < 0{
+            i = j // move the caterpillar tail
+        } else {
+            // take whatever profit is higher
+            profit = int(math.Max(float64(tempProfit), float64(profit)))
+        }
+        j++ // move the caterpillar head
+    }
+
+    // edge case if the profit is negative
+    if profit < 0 {
+        return 0
+    }
+    return profit
+}
